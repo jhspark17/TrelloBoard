@@ -4,7 +4,6 @@ import allTodos from '../../reducers/selectors'
 import {receiveTodo, removeTodo} from '../../actions/todo_actions'
 
 const mapStateToProps = (state) => {
-  console.log(state)
   const todos = allTodos(state);
   return ({
     todos

@@ -1,11 +1,11 @@
 
-const allTodos = state => {
-  let obj = state.todos.todos
-  console.log(obj)
-  let todos = Object.keys(obj).map(id => {
-    return obj[id];
+const allTodos = ({todos}) => {
+  console.log(todos)
+ const res = Object.keys(todos).map(id => {
+    return todos[id];
   })
-  return todos
+  console.log(res)
+  return res
 }
 
 export default allTodos

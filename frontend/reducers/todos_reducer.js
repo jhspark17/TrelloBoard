@@ -1,43 +1,28 @@
 import {RECEIVE_TODO, RECEIVE_TODOS, REMOVE_TODO} from "../actions/todo_actions";
 
-const initialState = {
-  todos: {
-  1: {
-    id: 1,
-    title: "wash car",
-    body: "with soap",
-    done: false
-  },
-  2: {
-    id: 2,
-    title: "wash dog",
-    body: "with shampoo",
-    done: true
-  }
-}
-}
 
 
-const todosReducer = (oldState = initialState, action) => {
- 
+const todosReducer = (oldState = {}, action) => {
   Object.freeze(oldState);
-  let newState;
+  let newState = {};
+
   switch(action.type) {
     case RECEIVE_TODOS:
-      let newState = Object.assign({}, oldState)
-      return newState
+      action.todos.forEach(todo => {
+        newState[todo.id] = todo;
+      })
+      return newState;
     case RECEIVE_TODO:
       let newTodo = {[action.todo.id]: action.todo};
-      console.log(oldState.todos)
-      newState = Object.assign(oldState.todos, newTodo)
-      
-
+      return Object.assign({}, oldState, newTodo)
     case REMOVE_TODO:
       console.log(action.id)
       newState = Object.assign({}, oldState);
-      delete newState.todos[action.id];
+      console.log(newState)
+      delete newState[action.id];
       return newState
     default:
+      console.log(oldState)
       return oldState;
   }
 }
